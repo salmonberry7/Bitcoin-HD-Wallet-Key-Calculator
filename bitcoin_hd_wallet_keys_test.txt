@@ -1,0 +1,702 @@
+Introduction
+------------
+
+iancoleman.io/bip39/ results are shown below a line for comparison and notated (IC).
+
+iancoleman.io/bip39/ does not support testnet so cannot use this to verify testnet functionality.
+
+bip32jp.github.io/english/ results are shown below a line for comparison and notated (JP).
+
+bip32jp.github.io/english/ has some support for testnet.
+
+bip32jp.github.io/english/ is recommended on iancoleman.io/bip39/.
+
+
+Testing not complete, particularly for testnet.
+
+
+Child index limits :
+2^32 = 4294967296
+2^32 - 1 = 4294967295
+2^31 = 2147483648
+2^31 - 1 = 2147483647
+
+
+
+Test 1
+------
+
+Tests of Single Key Mode.
+
+Command format :
+python bitcoin_hd_wallet_keys.py -s <mnemonic_sentence> <passphrase> <derivation_path> <testnet_flag>
+or
+python bitcoin_hd_wallet_keys.py -s <mnemonic_sentence> <passphrase> <derivation_path> <ext_key_prefix_override> <testnet_flag>
+
+
+
+Test 1.1
+--------
+
+18 word mnemonic, no passphrase, private key derivation path, unhardened keys, mainnet.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "act cliff aware laptop seed spin put world edit hold invite utility train daughter strong bag world worry" "" m/1/2/3 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : L1Tn5hs3CBnnduQBQGLrj1cwFEGtiYSenYwFR6nRnQ9MrSj8f7jA
+							   L1Tn5hs3CBnnduQBQGLrj1cwFEGtiYSenYwFR6nRnQ9MrSj8f7jA			(IC)
+Address                      : 1JRPRReHLXuUfN3XNk5wnZrYzhaxvbB7X5
+							   1JRPRReHLXuUfN3XNk5wnZrYzhaxvbB7X5							(IC)
+Extended private key         : 
+xprv9yqtbuzXcTMqGnmibdAYYrK2kFPrSPngRK1HSrBpSWTKp1si3k9iZDduNeQNwske7deSi8XRaAE5yRPEF4RXb2jzs4mZ4R6SvxrYCJraSgq
+xprv9yqtbuzXcTMqGnmibdAYYrK2kFPrSPngRK1HSrBpSWTKp1si3k9iZDduNeQNwske7deSi8XRaAE5yRPEF4RXb2jzs4mZ4R6SvxrYCJraSgq		(IC)
+Extended public key          : 
+xpub6CqF1RXRSpv8VGrBhehYuzFmJHELqrWXnXvtFEbRzqzJgpCrbHTy71xPDwaqoqZtnoUQPmXPhgxKQdUeYo2wn1N3Bad72mVpGMkTJBkSw56
+xpub6CqF1RXRSpv8VGrBhehYuzFmJHELqrWXnXvtFEbRzqzJgpCrbHTy71xPDwaqoqZtnoUQPmXPhgxKQdUeYo2wn1N3Bad72mVpGMkTJBkSw56		(IC)
+
+
+
+Test 1.2
+--------
+
+Testnet flag on :
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fog pigeon fresh fortune winner fat fault erosion blame term sniff average" "" m/1/2/3 1
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : Yes
+Private key                  : cMmevU2AsacxuLZ7gbycTyr59hTtRQWryCwr7gzLhdCjhyXfaGcF
+							   cMmevU2AsacxuLZ7gbycTyr59hTtRQWryCwr7gzLhdCjhyXfaGcF		(JP)
+Address                      : mjkD5n1nEzH2NceExULSq1vsP7JwTykx5Z
+							   mjkD5n1nEzH2NceExULSq1vsP7JwTykx5Z						(JP)
+Extended private key         : 
+tprv8fax97QgZ9WEntAFFPTR8DhHNHzKvq3Te8aQQE1tjtcBv6tyPT3ZkkmA7XgYFNeorScVY9yaXHrsd5Nh3L9FoViUixbAZEQ5U5Eo5u8d7hX
+tprv8fax97QgZ9WEntAFFPTR8DhHNHzKvq3Te8aQQE1tjtcBv6tyPT3ZkkmA7XgYFNeorScVY9yaXHrsd5Nh3L9FoViUixbAZEQ5U5Eo5u8d7hX		(JP)
+Extended public key          : 
+tpubDCGzHXSvhXBugMC39381XdMPwKWG6AENDSBBgk4CAAQakb9k1qs9wFP2Hi1LAGdLPkmmRV3CprQcYDikW5ek1CPtTuNqXPPykB4m2nmEGyY
+tpubDCGzHXSvhXBugMC39381XdMPwKWG6AENDSBBgk4CAAQakb9k1qs9wFP2Hi1LAGdLPkmmRV3CprQcYDikW5ek1CPtTuNqXPPykB4m2nmEGyY		(JP)
+
+
+
+Test 1.3
+--------
+
+12 word mnemonic, passphrase, private key derivation path, hardened and unhardened keys, mainnet.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1'/2/3'/4 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : L42jAfv6Tf57DX6SBSzANi4mJvFj9mB1LYUhamgEAeWG4vuMFxoT
+							   L42jAfv6Tf57DX6SBSzANi4mJvFj9mB1LYUhamgEAeWG4vuMFxoT			(IC)
+Address                      : 12K1k6VfqiepKMXKRadRewUEkTsDAZ91TF
+							   12K1k6VfqiepKMXKRadRewUEkTsDAZ91TF							(IC)
+Extended private key         : 
+xprvA1vprtjKxSWjdPNNqbLfURPdPzfqoticNoiCVTGgRNwHppUyWHGgtwjrF5WbGJNKNvGcBsMJZuyigbSndNEnF1kp15EVxKiJr6rteHMNwmv
+xprvA1vprtjKxSWjdPNNqbLfURPdPzfqoticNoiCVTGgRNwHppUyWHGgtwjrF5WbGJNKNvGcBsMJZuyigbSndNEnF1kp15EVxKiJr6rteHMNwmv		(IC)
+Extended public key          : 
+xpub6EvBGQGDnp52qsSqwcsfqZLMx2WLDMSTk2doHqgHyiUGhcp83pawSk4L6KUAubLFP4bHP6XMpyuceJ8nC7nmjmxvknrzdMYqzQxoKrTeGAt
+xpub6EvBGQGDnp52qsSqwcsfqZLMx2WLDMSTk2doHqgHyiUGhcp83pawSk4L6KUAubLFP4bHP6XMpyuceJ8nC7nmjmxvknrzdMYqzQxoKrTeGAt		(IC)
+
+
+
+Test 1.4
+--------
+
+24 word mnemonic, passphrase, public key derivation path, unhardened keys, mainnet.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "private ridge cupboard wrestle announce health mention orchard valve resemble awkward about return tiger interest claw nut slab tonight priority wasp admit junk empty" "J74fCpi83xCAYu75v3n" M/1/2/3/4/5/6/7/8/9 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Address                      : 1Q66tnF6QxvT5C4tWuxqzA3WtzDD48nFy5
+							   1Q66tnF6QxvT5C4tWuxqzA3WtzDD48nFy5				(IC)
+Extended public key          : 
+xpub6P9w4nqTwcz8eLZrDQbQ2iKW3NUGmYrCwEhm1G9pPJKND3WUFsyPVoHkbVXvbpYV8bniQZQTr4osU6qqiPTMMvT3aBQzWzbjX8puWzpFNyG
+xpub6P9w4nqTwcz8eLZrDQbQ2iKW3NUGmYrCwEhm1G9pPJKND3WUFsyPVoHkbVXvbpYV8bniQZQTr4osU6qqiPTMMvT3aBQzWzbjX8puWzpFNyG			(IC)
+
+
+
+Test 1.5
+--------
+
+Testnet flag on :
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "private ridge cupboard wrestle announce health mention orchard valve resemble awkward about return tiger interest claw nut slab tonight priority wasp admit junk empty" "J74fCpi83xCAYu75v3n" M/1/2/3/4/5/6/7/8/9 1
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : Yes
+Address                      : n4c4BqL5DzMhrJYWEUwDp5Fqkyouv3VNDG
+							   n4c4BqL5DzMhrJYWEUwDp5Fqkyouv3VNDG						(JP)
+Extended public key          : 
+tpubDPXZb2f9etwav8khfbaVEdesNVZvkwMGUsJ4MpCxjD5FxLBBL6pUeExaqXci8KVivWKd28vLPAdvAHLT7FJbFMuLdnAJCXFy76RKH1ZYcQV
+tpubDPXZb2f9etwav8khfbaVEdesNVZvkwMGUsJ4MpCxjD5FxLBBL6pUeExaqXci8KVivWKd28vLPAdvAHLT7FJbFMuLdnAJCXFy76RKH1ZYcQV		(JP)
+
+
+
+Test 1.6
+--------
+
+Master private key.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : KyRJ41JgE8DoaseRQ79p8jbwfskDNJKaupfmLqSgniFskM4mn13p
+							   KyRJ41JgE8DoaseRQ79p8jbwfskDNJKaupfmLqSgniFskM4mn13p					(JP)
+Address                      : 18aFz44kSsR34zJJ1AEPAidpcrMcT7Eo6Q
+   							   18aFz44kSsR34zJJ1AEPAidpcrMcT7Eo6Q									(JP)
+Extended private key         : 
+xprv9s21ZrQH143K4Lkcdu7ZKUMemiFpQYFKLrfxAGVMYWg6BtdQt5kgbBerwsFKQE1KfT6DjQ2wDEKNZZTQRxkPvzBZpvMCNqGifjaxACGJfoD
+xprv9s21ZrQH143K4Lkcdu7ZKUMemiFpQYFKLrfxAGVMYWg6BtdQt5kgbBerwsFKQE1KfT6DjQ2wDEKNZZTQRxkPvzBZpvMCNqGifjaxACGJfoD			(IC)
+Extended public key          : 
+xpub661MyMwAqRbcGpq5jveZgcJPKk6JozyAi5bYxety6rD54gxZRd4w8yyLoBYuDm9PAC27EQXnT74kMJhxDVvUjmNA2e7AiZm47SPgJHz8keQ
+xpub661MyMwAqRbcGpq5jveZgcJPKk6JozyAi5bYxety6rD54gxZRd4w8yyLoBYuDm9PAC27EQXnT74kMJhxDVvUjmNA2e7AiZm47SPgJHz8keQ			(IC)
+
+
+
+Test 1.7
+--------
+
+Master public key.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" M 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Address                      : 18aFz44kSsR34zJJ1AEPAidpcrMcT7Eo6Q
+							   18aFz44kSsR34zJJ1AEPAidpcrMcT7Eo6Q				(JP)
+Extended public key          : 
+xpub661MyMwAqRbcGpq5jveZgcJPKk6JozyAi5bYxety6rD54gxZRd4w8yyLoBYuDm9PAC27EQXnT74kMJhxDVvUjmNA2e7AiZm47SPgJHz8keQ
+xpub661MyMwAqRbcGpq5jveZgcJPKk6JozyAi5bYxety6rD54gxZRd4w8yyLoBYuDm9PAC27EQXnT74kMJhxDVvUjmNA2e7AiZm47SPgJHz8keQ			(IC)
+
+
+
+Test 1.8
+--------
+
+BIP44 test.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10'/0/36 0
+
+Output :
+Detected key type            : BIP44 derivation path
+Extended key prefix override : None
+Detected coin type           : Bitcoin Mainnet
+Testnet                      : No
+Private key                  : L3KKLkXELvrWPRZptLKfkLKVTCWWKUjw3UDRAmNPxMTR1Y5YSV51
+							   L3KKLkXELvrWPRZptLKfkLKVTCWWKUjw3UDRAmNPxMTR1Y5YSV51			(IC)
+Address                      : 1GdE5k5BQC25Br9MdR9dE7aGne7hc5njbL
+							   1GdE5k5BQC25Br9MdR9dE7aGne7hc5njbL							(IC)
+Extended private key         : 
+xprvA3hFYer7bMUqpVu7XoTcJ3PAxie45grskq2EquDN92dMQjg5z6rYVfutbGKEEKRy6DikPt6ftDuNztFdRtfCw3hUwqbBLJGCaUcKApEUPbd
+xprvA3hFYer7bMUqpVu7XoTcJ3PAxie45grskq2EquDN92dMQjg5z6rYVfutbGKEEKRy6DikPt6ftDuNztFdRtfCw3hUwqbBLJGCaUcKApEUPbd			(IC)
+Extended public key          : 
+xpub6GgbxAP1Rj392yyadpzcfBKuWkUYV9aj83wqeHcyhNALHY1EXeAo3UENSZfpqvcN8UEZ77bmzPQ8hmKb5qXYBC1ednJC1BqPyaP4yM2Chin
+xpub6GgbxAP1Rj392yyadpzcfBKuWkUYV9aj83wqeHcyhNALHY1EXeAo3UENSZfpqvcN8UEZ77bmzPQ8hmKb5qXYBC1ednJC1BqPyaP4yM2Chin			(IC)
+
+Get account extended keys.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10' 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : None
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : KwwxiZtxBES3HBgbJYGYiFoSQF6pB6vaWeayFSbgV4VS5KaRXorP
+							   KwwxiZtxBES3HBgbJYGYiFoSQF6pB6vaWeayFSbgV4VS5KaRXorP			(JP)
+Address                      : 18Wp2irKHyK7mdTWKfP53hg55sZMPYumub
+							   18Wp2irKHyK7mdTWKfP53hg55sZMPYumub							(JP)
+Extended private key         : 
+xprv9z6X24tgP2DNM8M3BU9xXDuX1W2LYL78v1QNzK4gu9yqZtCfa1oykPbUKi1B8aqRAxL3nQrwdmrDABCQ1wZWJV4tTZzwTjsPJzE3pH2ENZw
+xprv9z6X24tgP2DNM8M3BU9xXDuX1W2LYL78v1QNzK4gu9yqZtCfa1oykPbUKi1B8aqRAxL3nQrwdmrDABCQ1wZWJV4tTZzwTjsPJzE3pH2ENZw			(IC)
+Extended public key          : 
+xpub6D5sRaRaDPmfZcRWHVgxtMrFZXrpwnpzHEKynhUJTVWpSgXp7Z8EJBuxAzMefN8CpkGoFx5Aw79aY7cTuNp5mxof7L3pmZz8aFuy3mof9Wb
+xpub6D5sRaRaDPmfZcRWHVgxtMrFZXrpwnpzHEKynhUJTVWpSgXp7Z8EJBuxAzMefN8CpkGoFx5Aw79aY7cTuNp5mxof7L3pmZz8aFuy3mof9Wb			(IC)
+
+
+
+Test 1.9
+--------
+
+Testnet override :
+
+Coin type set to 0' (Bitcoin Mainnet). BIP44 type key.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10'/0/36 1
+
+Output :
+Detected key type            : BIP44 derivation path
+Extended key prefix override : None
+Detected coin type           : Bitcoin Mainnet
+Testnet                      : No
+Private key                  : L3KKLkXELvrWPRZptLKfkLKVTCWWKUjw3UDRAmNPxMTR1Y5YSV51
+Address                      : 1GdE5k5BQC25Br9MdR9dE7aGne7hc5njbL
+Extended private key         : 
+xprvA3hFYer7bMUqpVu7XoTcJ3PAxie45grskq2EquDN92dMQjg5z6rYVfutbGKEEKRy6DikPt6ftDuNztFdRtfCw3hUwqbBLJGCaUcKApEUPbd
+Extended public key          : 
+xpub6GgbxAP1Rj392yyadpzcfBKuWkUYV9aj83wqeHcyhNALHY1EXeAo3UENSZfpqvcN8UEZ77bmzPQ8hmKb5qXYBC1ednJC1BqPyaP4yM2Chin
+
+
+
+Test 1.10
+---------
+
+BIP49 test.
+
+21 word mnemonic, passphrase.
+
+Note extended key prefix override of 'bip32/bip44' to allow comparison of xprv/xpub with iancoleman.io/bip39/ because we have to use Ian's custom derivation BIP32 tab for the extended keys (which only uses the 'x' prefix).
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "parade elite forum car annual banana hurt glove hero this able daughter update ivory lend tobacco plastic struggle whip ten trigger" "W36vjSq9iibvT43" m/49'/0'/20'/1/32 bip32/bip44 0
+
+Output :
+Detected key type            : BIP49 derivation path
+Extended key prefix override : bip32/bip44
+Detected coin type           : Bitcoin Mainnet
+Testnet                      : No
+Private key                  : L1DtzPntR5vcVTxaM3aahFdNCnmBvx4oZ4Jh7fhf5YHPxXyyUZw5
+							   L1DtzPntR5vcVTxaM3aahFdNCnmBvx4oZ4Jh7fhf5YHPxXyyUZw5			(IC)
+Address                      : 3MDvUbz1G3onwLr8TpPJopvpC8uLRnnhG6
+							   3MDvUbz1G3onwLr8TpPJopvpC8uLRnnhG6							(IC)
+Extended private key         :
+xprvA2sE6uFhyz32mbhxkuPFEJXmvvJpJ5tmXg1dQPzvwSF2fAPy1ukLE6739vsCjP7NeDW1q3iF1RoJ1Hx8dkGRpeCz7R2SRpoZmSVb7xdnC2t
+xprvA2sE6uFhyz32mbhxkuPFEJXmvvJpJ5tmXg1dQPzvwSF2fAPy1ukLE6739vsCjP7NeDW1q3iF1RoJ1Hx8dkGRpeCz7R2SRpoZmSVb7xdnC2t		(IC)
+Extended public key          :
+xpub6FraWQnbpMbKz5nRrvvFbSUWUx9JhYccttwECnQYVmn1Xxj7ZT4amtRX1E3GUC3f4S66UXi1TxMieaZzkhb948VepyGMtm2Gu3VYQo8qRyp
+xpub6FraWQnbpMbKz5nRrvvFbSUWUx9JhYccttwECnQYVmn1Xxj7ZT4amtRX1E3GUC3f4S66UXi1TxMieaZzkhb948VepyGMtm2Gu3VYQo8qRyp		(IC)
+
+Get account extended keys. Note an extended key prefix override of 'bip49' is required because m/49'/0'/20' is only a partial BIP49
+derivation path and doesn't get automatically recognized as BIP49 type but is treated as CUSTOM type - we need it to be treated
+as BIP49 type to compare with Ian's BIP49 tab which uses the 'y' prefix.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "parade elite forum car annual banana hurt glove hero this able daughter update ivory lend tobacco plastic struggle whip ten trigger" "W36vjSq9iibvT43" m/49'/0'/20' bip49 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : bip49
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : L12Dg7zSnJC7crEL9JPnGZQvGP2kAt1JKc9otZ3RB2bZm5EXqy8N
+Address                      : 1NiyZnZmTvfohktH2FQ8vKjRrEC8mxh99o
+Extended private key         :
+yprvAJyDPvPFgbqPS2z1Zko49BYVEr8tmUJ4dwTqJt6wCbeVUnVgsu4x3aE3X8Gm9u1e9N2DzcpRAy4bLddzwTSRUH67Eu6CJmMU1JmZUehFabG
+yprvAJyDPvPFgbqPS2z1Zko49BYVEr8tmUJ4dwTqJt6wCbeVUnVgsu4x3aE3X8Gm9u1e9N2DzcpRAy4bLddzwTSRUH67Eu6CJmMU1JmZUehFabG		(IC)
+Extended public key          :
+ypub6XxZoRv9WyPgeX4UfnL4WKVDnsyPAw1v1APS7GWYkwBUMapqRSPCbNYXNRPmBnwDqLnsJwF69ad2zaUVm7Hha8X6VGMZkaxk1t8sYGSBAW6
+ypub6XxZoRv9WyPgeX4UfnL4WKVDnsyPAw1v1APS7GWYkwBUMapqRSPCbNYXNRPmBnwDqLnsJwF69ad2zaUVm7Hha8X6VGMZkaxk1t8sYGSBAW6		(IC)
+
+
+
+Test 1.11
+---------
+
+BIP84 test.
+
+15 word mnemonic, passphrase.
+
+Note extended key prefix override of 'bip32/bip44' to allow comparison of xprv/xpub with iancoleman.io/bip39/ because we have to use Ian's custom derivation BIP32 tab.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "auction capable mountain tragic tell neck orphan because april cloth planet consider denial reason speed" "a8m5Fwe327" m/84'/0'/60'/0/24 bip32/bip44 0
+
+Output :
+Detected key type            : BIP84 derivation path
+Extended key prefix override : bip32/bip44
+Detected coin type           : Bitcoin Mainnet
+Testnet                      : No
+Private key                  : L1YdTHFXw3gBkabv247Y3yqrzUTUwzCsJG9Xq7DAdwpofSSbwnvr
+							   L1YdTHFXw3gBkabv247Y3yqrzUTUwzCsJG9Xq7DAdwpofSSbwnvr			(IC)
+Address                      : bc1qd0y9f9aue3elzmtgj34m40yjuyym0lxauuqlqk
+							   bc1qd0y9f9aue3elzmtgj34m40yjuyym0lxauuqlqk					(IC)
+Extended private key         : 
+xprvA2gkYPiGzw9r15LMznZtTGUSEt7CyzgCT4K8Lqdoj2ADYsAGwgMJz7pWhHuJV7JaLvJ6XvhQKpdd4FuoFtADqxaEv7Qtfmdpfsb6uyT1YTJ
+xprvA2gkYPiGzw9r15LMznZtTGUSEt7CyzgCT4K8Lqdoj2ADYsAGwgMJz7pWhHuJV7JaLvJ6XvhQKpdd4FuoFtADqxaEv7Qtfmdpfsb6uyT1YTJ		(IC)
+Extended public key          : 
+xpub6Fg6wuFAqJi9DZQq6p6tpQRAnuwhPTQ3pHEj9E3RHMhCRfVRVDfZXv8zYahP78EHxDaaHpJh6ici4FAFjDtDfwFe7MGFiW2PBuBEtoGfHuu
+xpub6Fg6wuFAqJi9DZQq6p6tpQRAnuwhPTQ3pHEj9E3RHMhCRfVRVDfZXv8zYahP78EHxDaaHpJh6ici4FAFjDtDfwFe7MGFiW2PBuBEtoGfHuu		(IC)
+
+Get account extended keys. Note an extended key prefix override of 'bip84' is required because m/84'/0'/60' is only a partial BIP84
+derivation path and doesn't get automatically recognized as BIP84 type but is treated as CUSTOM type. We use Ian's BIP84 tab.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "auction capable mountain tragic tell neck orphan because april cloth planet consider denial reason speed" "a8m5Fwe327" m/84'/0'/60' bip84 0
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : bip84
+Detected coin type           : Not Applicable
+Testnet                      : No
+Private key                  : Kzb2xGwcnzxTxuLTxkwNNEkoaC3jub1QVTFEqczomCPwc1oqoXas
+Address                      : 1CxnnRebCtyJaq9QkLmuS333Q7rY27X5Ht
+Extended private key         : 
+zprvAdcYosfWPE5atpqvyFFMKpvQ4ZZ2G4tsR4HMxWzT4mjWEa1yCxGj9p7hRPihZFGdCioTEjikR9tjk2vno1xvvweJVpFjyePLp6UjcJHCFit
+zprvAdcYosfWPE5atpqvyFFMKpvQ4ZZ2G4tsR4HMxWzT4mjWEa1yCxGj9p7hRPihZFGdCioTEjikR9tjk2vno1xvvweJVpFjyePLp6UjcJHCFit		(IC)
+Extended public key          : 
+zpub6rbuDPCQDbdt7JvQ5GnMgxs8cbPWfXcinHCxkuQ4d7GV7NM7kVayhcSBGgczSmvLF7h9uyaKywPV28KfBErsFpZew7SbRrsKD23TZKZUgEF
+zpub6rbuDPCQDbdt7JvQ5GnMgxs8cbPWfXcinHCxkuQ4d7GV7NM7kVayhcSBGgczSmvLF7h9uyaKywPV28KfBErsFpZew7SbRrsKD23TZKZUgEF		(IC)
+
+
+
+Test 1.12
+---------
+
+Testnet flag on :
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "sibling dentist dad dial tank abstract buffalo depend twelve health one convince" "a8m5Fwe327" m/84'/0'/60' bip84 1
+
+Output :
+Detected key type            : Custom derivation path
+Extended key prefix override : bip84
+Detected coin type           : Not Applicable
+Testnet                      : Yes
+Private key                  : cR5r26oKT6hxntU4hPAnw6zshAyxEPUaZh1svF6pP5wPyhgQxLFa
+							   cR5r26oKT6hxntU4hPAnw6zshAyxEPUaZh1svF6pP5wPyhgQxLFa		(JP)
+Address                      : mmoKbVCE4r42DEi7be9gs1iPvEznpKiCra
+							   mmoKbVCE4r42DEi7be9gs1iPvEznpKiCra						(JP)
+Extended private key         : 
+vprv9KijLyxiA9R979pCJjMMphmUBdJE33gpueE7V4xFQTWjL8ZRdNYSr4CujgvEGCGcCPE6tdZxqpUhMi9xDpqboWXq51x3VXV7G5ayWS8pA2t
+no comparison available
+Extended public key          : 
+vpub5Yi5kVVbzWySKdtfQktNBqiCjf8iSWQgGs9iHTMrxo3iCvtaAurhPrXPb12TnRbCFMZuzGKYu58zceGDa4HBQxcgVrM1e5V37SUo4JK63CR
+no comparison available
+
+
+
+Test 1.13
+---------
+
+Testnet override :
+
+Coin type set to 1' (Bitcoin Testnet). BIP84 type key.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "sibling dentist dad dial tank abstract buffalo depend twelve health one convince" "a8m5Fwe327" m/84'/1'/60'/0/24 0
+
+Output :
+Detected key type            : BIP84 derivation path
+Extended key prefix override : None
+Detected coin type           : Bitcoin Testnet
+Testnet                      : Yes
+Private key                  : cNRF91v4FgRxRkJjAc4cdzonkRUrJpxADfnvo4qar7XXWQETjU6v
+							   cNRF91v4FgRxRkJjAc4cdzonkRUrJpxADfnvo4qar7XXWQETjU6v		(JP)
+Address                      : tb1q4e4xgx3t4ktmcd4kzm7xqxlpepfdmh9ajcf7re
+							   no comparison available
+Extended private key         : 
+vprv9NyawocQ3sPjJQHqvQhEpKNtxKVSe2UKvenY1sZQnLepKskDugDHok8N5BdpEihjh9ooTxtpdGw51XEtCrj6bfF5cXRtM1XDxmVsBVEA3cs
+no comparison available
+Extended public key          : 
+vpub5bxwMK9HtEx2WtNK2SEFBTKdWMKw3VCBHsi8pFy2LgBoCg5NTDXYMYSqvSj6kiykNqdiZpHG8e3ac8hEJUbQa51VJW2HtsrsbXzUBSwgUc6
+no comparison available
+
+
+
+Test 1.14
+---------
+
+Error test.
+
+Code temporarily modified to generate bad hash error.
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "" m/11/12/13/14 0
+
+Output :
+ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index
+
+
+
+Test 1.15
+---------
+
+Error test.
+
+Invalid characters and child indices in derivation path.
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" n/11/12/13/14 0
+Output :
+ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648/13/14 0
+Output :
+ERROR in function derivation_path_ext_key : non-hardened child index 2147483648 is out of range
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" m/11/12/13/2147483647 0
+Output :
+Success
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648'/13/14 0
+Output :
+ERROR in function derivation_path_ext_key : hardened child index 2147483648' is out of range
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483647'/13/14 0
+Output :
+Success
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "" "" m/11/0x12/13/14 0
+Output :
+ERROR in function derivation_path_ext_key : invalid child index 0x12 in HD wallet derivation path
+
+
+
+Test 1.16
+---------
+
+Error test.
+
+Attempted public key derivation to hardened child.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" M/1/2/3'/4 0
+
+Output :
+ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index 3'
+
+
+
+Test 1.17
+---------
+
+Error test.
+
+BIP44 derivation path with hardened address index.
+
+Command :
+python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10'/0/36' 0
+
+Output :
+ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
+
+
+
+Test 2
+------
+
+Tests of Range of Keys Mode.
+
+Command format :
+python bitcoin_hd_wallet_keys.py -r <mnemonic_sentence> <passphrase> <parent_derivation_path> <starting_child_key_index> <no_of_child_keys> <testnet_flag>
+
+
+
+Test 2.1
+---------
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/20/30/40/50/60/70 23 8 0
+
+Output :
+Detected key type  : Custom derivation path
+Detected coin type : Not Applicable
+Testnet            : No
+
+Derivation Path                   Address                                     Private Key
+----------------------            ----------------------------------          ----------------------------------------------------
+m/20/30/40/50/60/70/23            1MsT54AtZuwWk9ySf2Cijawnkkm1Mx21qR          L5d1fyH6K9GRMrLJJC94hjF4VznS3GnQ9MfcjXEVtXMtAK4h1JKY
+m/20/30/40/50/60/70/24            1NzucLBn8AhDGzHBA629EMS5hUGJ2SZG5V          L4qZSbmX3iQ9F1M2M6ZXGRT3y1HqUMWwtkSBkDcJ85UAM2EJUVbn
+m/20/30/40/50/60/70/25            19qnGekrmcrJYJAmC5i672m8bfs25RXsg1          L3PBo76j8MHxoHR3Ho4Q5NfF2PYb9Lb12WHaKu93EUiH9wQU4n3H
+m/20/30/40/50/60/70/26            1KQMCwWSnswSzYZPFtPdTrQyt2Uojq8FX8          L3zAwmgMrG6pgFbsfcvHpkZirqbs6AaAyywepqdzViDZb5VWNF1q
+m/20/30/40/50/60/70/27            1AVVt9WxZibpVgHyQ7ZVtZshFokvcK9XD3          L3JraQpKoi9BAEwEis4W3GxAbXoZVzng1botQ2LR12WmJwE3zuFh
+m/20/30/40/50/60/70/28            1GTyEYtJtiJ6rDDkqASa6MgCTomhKHXXAL          KyXSaX2VbGG4j4mqDqTqjaVESpnfbpGEzVWNrDDLXmtGU6Q71Yge
+m/20/30/40/50/60/70/29            1L61uDNZ1Vg3fuSJtxy7RsBQXtYJkJALKx          KzLNCjyNBaEeDUY9ejFTDDcfs6QxG7TYYho2SqZmp5VGgBYRY68T
+m/20/30/40/50/60/70/30            18Y1NvqyarHjRjzfg9X4FURvHRjEX9mG6x          KyTLoKqxTifLXgbN84KS3ycX97vjEGVPvhhG6tzyKhToMBU7XJaK
+
+m/20/30/40/50/60/70/26 :
+1KQMCwWSnswSzYZPFtPdTrQyt2Uojq8FX8
+1KQMCwWSnswSzYZPFtPdTrQyt2Uojq8FX8							(IC)
+L3zAwmgMrG6pgFbsfcvHpkZirqbs6AaAyywepqdzViDZb5VWNF1q
+L3zAwmgMrG6pgFbsfcvHpkZirqbs6AaAyywepqdzViDZb5VWNF1q		(IC)
+
+
+
+Test 2.2
+--------
+
+Hardened child keys.
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/20/30/40'/50/60'/70 9' 3 0
+
+Output :
+Detected key type  : Custom derivation path
+Detected coin type : Not Applicable
+Testnet            : No
+
+Derivation Path                      Address                                     Private Key
+-------------------------            ----------------------------------          ----------------------------------------------------
+m/20/30/40'/50/60'/70/9'             1GkVcrwLcapcz9AFDDvEttesmtQo15fKUq          L4eYM9AWksJcriomZ9DdSnLEyS5TmQiyTuRizLtSzHQv3hbcqGF6
+m/20/30/40'/50/60'/70/10'            1DsntwZhTVU1umLBDXvrF7ySL991c2YuAB          L2mcV71VpPyzkGuRVcRdURW629YNG5u37vEEFPffe9pELhe4zhMf
+m/20/30/40'/50/60'/70/11'            1C7GqdJvtXujDdCGJAwSqFrUunEYW4gwcJ          KzfSbhA2LKjk4oTFyh6UenrwqtGFjsf4Nf7fTdSejSQxS3qNSash
+
+m/20/30/40'/50/60'/70/10' :
+1DsntwZhTVU1umLBDXvrF7ySL991c2YuAB
+1DsntwZhTVU1umLBDXvrF7ySL991c2YuAB							(IC)
+L2mcV71VpPyzkGuRVcRdURW629YNG5u37vEEFPffe9pELhe4zhMf
+L2mcV71VpPyzkGuRVcRdURW629YNG5u37vEEFPffe9pELhe4zhMf		(IC)
+
+
+
+Test 2.3
+--------
+
+Testnet flag on.
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/20/30 10 3 1
+
+Output :
+Detected key type  : Custom derivation path
+Detected coin type : Not Applicable
+Testnet            : Yes
+
+Derivation Path          Address                                     Private Key
+---------------          ----------------------------------          ----------------------------------------------------
+m/20/30/10               mtYaFX2dFqgtfVFa88ffvLAq8WvKu5wHPr          cRregZ8Hp83X2VDh6UNo8e1hwvzBQ2r8G5gpmDmVxaZ5DGDPV8uT
+m/20/30/11               mnTGPcFENae2fvq89FdBu4uNkAz41QPh6U          cTMifUGguWdf1X4uN4j1xX55TW694eni9EzBdnSRN2RDoHTmTZvm
+m/20/30/12               mkA8y1beyvJfphaU4PaATTKwD9Ku5XnewY          cQj9Y2MyRsZ1PK4KBb33dXhr8LW8h3DSfxcoJZH3w9c5UPzeDQ5R
+
+m/20/30/12 :
+mkA8y1beyvJfphaU4PaATTKwD9Ku5XnewY
+mkA8y1beyvJfphaU4PaATTKwD9Ku5XnewY								(JP)
+cQj9Y2MyRsZ1PK4KBb33dXhr8LW8h3DSfxcoJZH3w9c5UPzeDQ5R
+cQj9Y2MyRsZ1PK4KBb33dXhr8LW8h3DSfxcoJZH3w9c5UPzeDQ5R			(JP)
+
+
+
+Test 2.4
+--------
+
+Test BIP49 and testnet override.
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/49'/0'/64'/1 10 3 1
+
+Output :
+Detected key type  : BIP49 derivation path
+Detected coin type : Bitcoin Mainnet
+Testnet            : No
+
+Derivation Path              Address                                      Private Key
+-----------------            -----------------------------------          ----------------------------------------------------
+m/49'/0'/64'/1/10            3KXfgrPGE35vvZWBS63AefwpSvzFNuDJy2           KyQB16BoCPBSisoeL1Wjx2QJVP2fXaxw6gGSRPyHM5cPje3os5E7
+m/49'/0'/64'/1/11            3GjHkJsLWNWYW3ma2pbxAmgFam2rcZCVxW           L3ifwjFWTeRVpWo7ChJMXaDiPF55AqFY95NXRvz3VPj6gWARTLep
+m/49'/0'/64'/1/12            33ZjE6jaJe95XvWTVgmWhz5HrubXmxSFfy           L2eEVzU3kFwquDVXSceoozb9yz4UaJBBo6g8dPrAq1SeRVjkch6d
+
+m/49'/0'/64'/1/12 :
+33ZjE6jaJe95XvWTVgmWhz5HrubXmxSFfy
+33ZjE6jaJe95XvWTVgmWhz5HrubXmxSFfy								(IC)
+L2eEVzU3kFwquDVXSceoozb9yz4UaJBBo6g8dPrAq1SeRVjkch6d
+L2eEVzU3kFwquDVXSceoozb9yz4UaJBBo6g8dPrAq1SeRVjkch6d			(IC)
+
+
+
+Test 2.5
+--------
+
+Test BIP84 and testnet override.
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/84'/1'/64'/1 10 3 0
+
+Output :
+Detected key type  : BIP84 derivation path
+Detected coin type : Bitcoin Testnet
+Testnet            : Yes
+
+Derivation Path              Address                                             Private Key
+-----------------            ------------------------------------------          ----------------------------------------------------
+m/84'/1'/64'/1/10            tb1q7ad0fkt3j76eg77292yvhhq3h8krkpeawrvtw5          cUBt2xf3DVU4JUfMyDyNPwTvPnQNsHfktF3srqj83dYrj1tVfGA2
+m/84'/1'/64'/1/11            tb1qz7av82shq8csjyqzs6cfgusd046evua2ml2nrs          cW335o59oa3BqxdDcmL8FXQm29QfP9GgNmQPAppzdR9q7pDSEhdU
+m/84'/1'/64'/1/12            tb1q6hp2xe4x7cp2gcuaeulsgtd87n7a45ugljrvt5          cVA4zAuJ3k2ncA67NNE3Dq2EyMPt6ns6Dje1K2CYQohYHxBNZ6VK
+
+m/84'/1'/64'/1/10 :
+tb1q7ad0fkt3j76eg77292yvhhq3h8krkpeawrvtw5
+no comparison available
+cUBt2xf3DVU4JUfMyDyNPwTvPnQNsHfktF3srqj83dYrj1tVfGA2
+cUBt2xf3DVU4JUfMyDyNPwTvPnQNsHfktF3srqj83dYrj1tVfGA2				(JP)
+
+
+
+Test 2.6
+--------
+
+Errors.
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/1'/64'/1 10' 3 0
+
+Output :
+ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
+
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648 3 0
+
+Output :
+ERROR in function get_range_info : non-hardened child index 2147483648 is out of range
+
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 10 2147483648 0
+
+Output :
+ERROR in function get_range_info : range of non-hardened child key indices too large
+
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648' 12 0
+
+Output :
+ERROR in function get_range_info : hardened child index 2147483648' is out of range
+
+
+Command :
+python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 20' 2147483648 0
+
+Output :
+ERROR in function get_range_info : range of hardened child key indices too large
+
+

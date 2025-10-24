@@ -1,0 +1,17 @@
+Bitcoin HD Wallet Key Calculator
+
+Supports BIP32, BIP39, BIP43, BIP44, BIP49, BIP84 for coin_type' values of 0' or 1'. 
+
+Usage :-
+Single key mode :
+python bitcoin_hd_wallet_keys.py -s <mnemonic_sentence> <passphrase> <derivation_path> <testnet_flag>
+or
+python bitcoin_hd_wallet_keys.py -s <mnemonic_sentence> <passphrase> <derivation_path> <ext_key_prefix_override> <testnet_flag>
+Range of keys mode :
+python bitcoin_hd_wallet_keys.py -r <mnemonic_sentence> <passphrase> <parent_derivation_path> <starting_child_key_index> <no_of_child_keys> <testnet_flag>
+Help mode :
+python bitcoin_hd_wallet_keys.py, or
+python bitcoin_hd_wallet_keys.py -h
+
+Alpha stage code, limited testing done.
+
