@@ -1,4 +1,7 @@
 ```
+
+ALPHA STAGE CODE - LIMITED TESTING DONE
+
 bitcoin_hd_wallet_keys.py
 -------------------------
 
