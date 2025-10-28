@@ -730,7 +730,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 zpub6qpqX676Kzr6opsGXYposTia9szop8ZQEoDKNi6H3vAdFSTSKYmEcM8L2taiG7Cz8egUGTWoWd3CvGF2dbDMW5t99EKK3HGBfsnRmYPva1M
-zpub6qpqX676Kzr6opsGXYposTia9szop8ZQEoDKNi6H3vAdFSTSKYmEcM8L2taiG7Cz8egUGTWoWd3CvGF2dbDMW5t99EKK3HGBfsnRmYPva1M		Trezor
+zpub6qpqX676Kzr6opsGXYposTia9szop8ZQEoDKNi6H3vAdFSTSKYmEcM8L2taiG7Cz8egUGTWoWd3CvGF2dbDMW5t99EKK3HGBfsnRmYPva1M		(Trezor)
 
 Note :
 We used the <ext_key_prefix_override> = bip84 since we want a BIP84 style 'z' prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/84'/0'/0' as of type bip84, it only recognizes a full BIP84 derivation path as of type bip84, ie. one leading to an address index as described in BIP84. m/84'/0'/0' is recognized as a custom type derivation path.
@@ -753,7 +753,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 xpub6D9UeShn7f1kgSxCPMJzW3tHvTJXNfqvtXaeHXXECTdGhoztvw7TCrVB24ytp4MNyc4or3h6gNWUraFSzpTbjMfAQjXCnWAmuA9zZn8BA5h
-xpub6D9UeShn7f1kgSxCPMJzW3tHvTJXNfqvtXaeHXXECTdGhoztvw7TCrVB24ytp4MNyc4or3h6gNWUraFSzpTbjMfAQjXCnWAmuA9zZn8BA5h		Trezor
+xpub6D9UeShn7f1kgSxCPMJzW3tHvTJXNfqvtXaeHXXECTdGhoztvw7TCrVB24ytp4MNyc4or3h6gNWUraFSzpTbjMfAQjXCnWAmuA9zZn8BA5h		(Trezor)
 
 Note :
 We didn't need to set the <ext_key_prefix_override> since we want a BIP44 style 'x' prefix on the xpub as given for a custom type derivation path and m/44'/0'/0' is recognized as a custom type derivation path.
@@ -776,7 +776,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 ypub6WpwMLs26SpxWDzLJdk9v6YvjoT7nNh5TBtmsihQP3uwhS5xCMLCAUQR8LoxnSGJr9F29tJkJoAZpu6ahvp5MUkodyg2tdNCqQiL2gEskdg
-ypub6WpwMLs26SpxWDzLJdk9v6YvjoT7nNh5TBtmsihQP3uwhS5xCMLCAUQR8LoxnSGJr9F29tJkJoAZpu6ahvp5MUkodyg2tdNCqQiL2gEskdg		Trezor
+ypub6WpwMLs26SpxWDzLJdk9v6YvjoT7nNh5TBtmsihQP3uwhS5xCMLCAUQR8LoxnSGJr9F29tJkJoAZpu6ahvp5MUkodyg2tdNCqQiL2gEskdg		(Trezor)
 
 Note :
 We used the <ext_key_prefix_override> = bip49 since we want a BIP49 style 'y' prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/49'/0'/0' as of type bip49, it only recognizes a full BIP49 derivation path as of type bip49, ie. one leading to an address index as described in BIP49. m/49'/0'/0' is recognized as a custom type derivation path.
@@ -799,7 +799,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 vpub5YEq8nMndFdcZaqoVXAnnUF5bvkNy8Kn92fjTij2rcioMViBfPxhQd8ibXqwpzwn1wygvTj7WX3LCmfBWiaU94YxhToPqLeGTUNKUJKPJCp
-vpub5YEq8nMndFdcZaqoVXAnnUF5bvkNy8Kn92fjTij2rcioMViBfPxhQd8ibXqwpzwn1wygvTj7WX3LCmfBWiaU94YxhToPqLeGTUNKUJKPJCp		Trezor
+vpub5YEq8nMndFdcZaqoVXAnnUF5bvkNy8Kn92fjTij2rcioMViBfPxhQd8ibXqwpzwn1wygvTj7WX3LCmfBWiaU94YxhToPqLeGTUNKUJKPJCp		(Trezor)
 
 Note :
 (i) We used the <ext_key_prefix_override> = bip84 since we want a BIP84 style 'v' testnet prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/84'/1'/0' as of type bip84, it only recognizes a full BIP84 derivation path as of type bip84, ie. one leading to an address index as described in BIP84. m/84'/1'/0' is recognized as a custom type derivation path.
@@ -823,7 +823,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 tpubDCxQHzLw6k1uSAH9nm5mzctj84Z9iYwdH1ATR3riDVhoRLGHPDKj64WMQYHdy1zQghB2iV6UNK4tRWVgThVaNHKsFPZD9LkGfe9G9tEVwCc
-tpubDCxQHzLw6k1uSAH9nm5mzctj84Z9iYwdH1ATR3riDVhoRLGHPDKj64WMQYHdy1zQghB2iV6UNK4tRWVgThVaNHKsFPZD9LkGfe9G9tEVwCc		Trezor
+tpubDCxQHzLw6k1uSAH9nm5mzctj84Z9iYwdH1ATR3riDVhoRLGHPDKj64WMQYHdy1zQghB2iV6UNK4tRWVgThVaNHKsFPZD9LkGfe9G9tEVwCc		(Trezor)
 
 Note :
 (i) We didn't need to set the <ext_key_prefix_override> since we want a BIP44 style 't' testnet prefix on the xpub as given for a custom type derivation path and m/44'/1'/0' is recognized as a custom type derivation path.
@@ -847,7 +847,7 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 upub5Eh6zN9dWW1njJCkrXsvf6kRsPfkha9VfEU3VrXgTbKHeKf2arruTqXK5PdZ2UciVJCNZhUiw4oF6sW69nfvTC9Ghi4WkEbYsyTLJgvFUSp
-upub5Eh6zN9dWW1njJCkrXsvf6kRsPfkha9VfEU3VrXgTbKHeKf2arruTqXK5PdZ2UciVJCNZhUiw4oF6sW69nfvTC9Ghi4WkEbYsyTLJgvFUSp		Trezor
+upub5Eh6zN9dWW1njJCkrXsvf6kRsPfkha9VfEU3VrXgTbKHeKf2arruTqXK5PdZ2UciVJCNZhUiw4oF6sW69nfvTC9Ghi4WkEbYsyTLJgvFUSp		(Trezor)
 
 Note :
 (i) We used the <ext_key_prefix_override> = bip49 since we want a BIP49 style 'u' testnet prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/49'/1'/0' as of type bip49, it only recognizes a full BIP49 derivation path as of type bip49, ie. one leading to an address index as described in BIP49. m/49'/1'/0' is recognized as a custom type derivation path.
@@ -858,7 +858,7 @@ Note :
 Test 3.7
 --------
 
-Mainnet.
+Mainnet + passphrase.
 
 Trezor Suite & Trezor device reported info :-
 Account type :				BIP84
@@ -874,9 +874,88 @@ py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal 
 
 Output :
 zpub6rK8JgUpgPakHgNoKwBtdHdqjYdchDXSrJKSq9W72mQufSZoSB1XeBS4VKwU6a8vgfEjcHUfN6X1xN5jzDBRtKVfkSpTjiwJLPYb5xRC3Q4
-zpub6rK8JgUpgPakHgNoKwBtdHdqjYdchDXSrJKSq9W72mQufSZoSB1XeBS4VKwU6a8vgfEjcHUfN6X1xN5jzDBRtKVfkSpTjiwJLPYb5xRC3Q4		Trezor
+zpub6rK8JgUpgPakHgNoKwBtdHdqjYdchDXSrJKSq9W72mQufSZoSB1XeBS4VKwU6a8vgfEjcHUfN6X1xN5jzDBRtKVfkSpTjiwJLPYb5xRC3Q4		(Trezor)
 
 Note :
 We used the <ext_key_prefix_override> = bip84 since we want a BIP84 style 'z' prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/84'/0'/0' as of type bip84, it only recognizes a full BIP84 derivation path as of type bip84, ie. one leading to an address index as described in BIP84. m/84'/0'/0' is recognized as a custom type derivation path.
 
+
+
+Test 3.8
+--------
+
+Testnet + passphrase.
+
+Trezor Suite & Trezor device reported info :-
+Account type :				BIP49
+Derivation path :			m/49'/1'/0'
+Wallet type :				Passphrase wallet
+xpub : upub5ECg1JYN2Pkh4vwmXyMDVb8o897itJhozQ7N1BfQbkYLPG7aSsSLdJdCRBSFQ3nxnA2hYj3ziTJDU1oUmYLf5dTUohzksWyc6ZHsnZeik5U
+
+Passphrase I entered :
+abc
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal glare acoustic clown pact sadness" "abc" m/49'/1'/0' bip49 1
+
+Output :
+upub5ECg1JYN2Pkh4vwmXyMDVb8o897itJhozQ7N1BfQbkYLPG7aSsSLdJdCRBSFQ3nxnA2hYj3ziTJDU1oUmYLf5dTUohzksWyc6ZHsnZeik5U
+upub5ECg1JYN2Pkh4vwmXyMDVb8o897itJhozQ7N1BfQbkYLPG7aSsSLdJdCRBSFQ3nxnA2hYj3ziTJDU1oUmYLf5dTUohzksWyc6ZHsnZeik5U		(Trezor)
+
+Note :
+(i) We used the <ext_key_prefix_override> = bip49 since we want a BIP49 style 'u' testnet prefix on the xpub but bitcoin_hd_wallet_keys.py does not automatically recognize derivation path m/49'/1'/0' as of type bip49, it only recognizes a full BIP49 derivation path as of type bip49, ie. one leading to an address index as described in BIP49. m/49'/1'/0' is recognized as a custom type derivation path.
+(ii) We have to specify the <testnet_flag> as 1 as the testnet flag override that applies when the coin_type is 1' (Bitcoin Testnet) only works when the derivation path is of type BIP44, BIP49, or BIP84.
+
+
+
+Test 3.9
+--------
+
+Test receive address on mainnet.
+
+Trezor Suite & Trezor device reported info :-
+Account type :				BIP84
+Derivation path :			m/84'/0'/0'
+Wallet type :				Standard wallet
+xpub : zpub6qpqX676Kzr6opsGXYposTia9szop8ZQEoDKNi6H3vAdFSTSKYmEcM8L2taiG7Cz8egUGTWoWd3CvGF2dbDMW5t99EKK3HGBfsnRmYPva1M
+
+Supposed address path :
+m/84'/0'/0'/0/0
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal glare acoustic clown pact sadness" "" m/84'/0'/0'/0/0 0
+
+Output :
+bc1qfjajafn3n5c3aftd3zcuqyadgekpnkexpxlvmu
+bc1qfjajafn3n5c3aftd3zcuqyadgekpnkexpxlvmu				(Trezor)
+
+
+
+Test 3.10
+---------
+
+Test receive address on testnet with passphrase.
+
+Trezor Suite & Trezor device reported info :-
+Account type :				BIP84
+Derivation path :			m/49'/1'/0'
+Wallet type :				Standard wallet
+xpub : upub5ECg1JYN2Pkh4vwmXyMDVb8o897itJhozQ7N1BfQbkYLPG7aSsSLdJdCRBSFQ3nxnA2hYj3ziTJDU1oUmYLf5dTUohzksWyc6ZHsnZeik5U
+
+Supposed address path :
+m/49'/1'/0'/0/0
+
+Passphrase I entered :
+abc
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "essay north logic orbit forest catalog federal glare acoustic clown pact sadness" "abc" m/49'/1'/0'/0/0 0
+
+Output :
+2N9E6ENt4cLknSTuKx3jZFMYbk8CKZuBCG1
+2N9E6ENt4cLknSTuKx3jZFMYbk8CKZuBCG1				(Trezor)
+
+Note :
+(i) We didn't need the <ext_key_prefix_override> = bip49 since we only require the address not the ext pub key. However note m/49'/1'/0'/0/0 is recognized as a BIP49 type derivation path.
+(ii) Testnet override works since m/49'/1'/0'/0/0 is recognized as a BIP49 type derivation path.
 
