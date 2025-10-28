@@ -707,7 +707,7 @@ ERROR in function get_range_info : range of hardened child key indices too large
 Test 3
 ------
 
-Tests of hardware wallet account xpub's on Trezor Safe 3 hardware wallet.
+Tests of hardware wallet account xpub's and receive addresses on Trezor Safe 3 hardware wallet.
 
 12 word phrase on Trezor device :
 essay north logic orbit forest catalog federal glare acoustic clown pact sadness
