@@ -939,7 +939,7 @@ Test receive address on testnet with passphrase.
 Trezor Suite & Trezor device reported info :-
 Account type :				BIP84
 Derivation path :			m/49'/1'/0'
-Wallet type :				Standard wallet
+Wallet type :				Passphrase wallet
 xpub : upub5ECg1JYN2Pkh4vwmXyMDVb8o897itJhozQ7N1BfQbkYLPG7aSsSLdJdCRBSFQ3nxnA2hYj3ziTJDU1oUmYLf5dTUohzksWyc6ZHsnZeik5U
 
 Supposed address path :
