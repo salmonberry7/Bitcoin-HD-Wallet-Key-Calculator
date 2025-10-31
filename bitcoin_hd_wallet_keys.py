@@ -1,3 +1,12 @@
+##########################################################################################
+##																						##
+##		NO WARRANTY OR CLAIM OF FITNESS FOR ANY PURPOSE IS PROVIDED FOR THIS PROGRAM.	##
+##																						##
+##		ALPHA STAGE CODE, LIMITED TESTING DONE.											##
+##																						##
+##########################################################################################
+#
+#
 # bitcoin_hd_wallet_keys.py
 # -------------------------
 #
@@ -61,17 +70,21 @@
 # where :
 # <mnemonic_sentence> = BIP39 mnemonic sentence, ie. the space separated mnemonic words concatenated into a single text 
 # string as specified in BIP39. The mnemonic sentence may comprise 12, 15, 18, 21, or 24 words depending on the initial 
-# entropy length (128 - 256 bits) that was used to derive the word list.
+# entropy length (128 - 256 bits) that was used to derive the word list. Enclose in double quotes.
 # <passphrase> = BIP39 optional passphrase, specify "" for the default value of an empty string.
-# <derivation_path> = in single key mode BIP32 derivation path of the required key.
+# <derivation_path> = in single key mode BIP32 derivation path of the required key. If you are looking for an xpub, a path
+# like M/44'/0'/0' won't work, as public parent key to public child key derivation is not possible for hardened child indices,
+# - use m/44'/0'/0' instead.
 # <ext_key_prefix_override> = in single key mode specify bip32/bip44, bip49, or bip84 to override the prefix for extended keys.
 # <parent_derivation_path> = in range of keys mode, BIP32 derivation path of the parent key of the required range of keys.
 # <starting_child_key_index> = in range of keys mode, a non-hardened or a hardened child index, the latter denoted 
 # by a ' suffix. The range of child keys cannot cross over from non-hardened keys to hardened keys.
 # <no_of_child_keys> = in range of keys mode the number of child keys in range.
-# <testnet_flag> = flag set to 1 for testnet, 0 for mainnet. If derivation path is of type BIP44, BIP49,
+# <testnet_flag> = flag set to 1 for testnet, 0 for mainnet. If derivation path is a full path of type BIP44, BIP49,
 # or BIP84 the user specified testnet flag is overridden to a value of True/False for coin_type' of 1'/0' resp.
-#
+# (a partial BIP44/BIP49/BIP84 path like m/84'/1'/0' won't cause override of the testnet flag).
+# Note : all the required parameters must be included in the above command lines, no default values are defined.
+
 # Dependencies :
 # Jimmy Song library and Bech32/Bech32m Python reference implementation - details given below under 'Imports'.
 # 
@@ -857,16 +870,20 @@ python bitcoin_hd_wallet_keys.py -h
 where :
 <mnemonic_sentence> = BIP39 mnemonic sentence, ie. the space separated mnemonic words concatenated into a single text 
 string as specified in BIP39. The mnemonic sentence may comprise 12, 15, 18, 21, or 24 words depending on the initial 
-entropy length (128 - 256 bits) that was used to derive the word list.
+entropy length (128 - 256 bits) that was used to derive the word list. Enclose in double quotes.
 <passphrase> = BIP39 optional passphrase, specify "" for the default value of an empty string.
-<derivation_path> = in single key mode BIP32 derivation path of the required key.
+<derivation_path> = in single key mode BIP32 derivation path of the required key. If you are looking for an xpub, a path
+like M/44'/0'/0' won't work, as public parent key to public child key derivation is not possible for hardened child indices,
+- use m/44'/0'/0' instead.
 <ext_key_prefix_override> = in single key mode specify bip32/bip44, bip49, or bip84 to override the prefix for extended keys.
 <parent_derivation_path> = in range of keys mode, BIP32 derivation path of the parent key of the required range of keys.
 <starting_child_key_index> = in range of keys mode, a non-hardened or a hardened child index, the latter denoted 
 by a ' suffix. The range of child keys cannot cross over from non-hardened keys to hardened keys.
 <no_of_child_keys> = in range of keys mode the number of child keys in range.
-<testnet_flag> = flag set to 1 for testnet, 0 for mainnet. If derivation path is of type BIP44, BIP49,
+<testnet_flag> = flag set to 1 for testnet, 0 for mainnet. If derivation path is a full path of type BIP44, BIP49,
 or BIP84 the user specified testnet flag is overridden to a value of True/False for coin_type' of 1'/0' resp.
+(a partial BIP44/BIP49/BIP84 path like m/84'/1'/0' won't cause override of the testnet flag).
+Note : all the required parameters must be included in the above command lines, no default values are defined.
 """)
 
 
