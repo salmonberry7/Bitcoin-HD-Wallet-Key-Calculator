@@ -324,8 +324,7 @@ def pub_to_p2wpkh_address(pub_key, testnet=False) :
 	bech32_address = encode(hrp, version_byte, witness_program)
 
 	if not bech32_address :
-		print('ERROR in function pub_to_p2wpkh_address : failed to construct Bech32 segwit address')
-		sys.exit(2)
+		raise ValueError('ERROR in function pub_to_p2wpkh_address : failed to construct Bech32 segwit address')
 
 	return bech32_address
 
@@ -484,7 +483,7 @@ def base58check_ext_pub_key(depth, parent_fingerprint, child_index, chain_code, 
 # Returns :
 # child_priv_key = byte array of length 32
 # child_chain_code = byte array of length 32
-# or terminates script with an error if an unsuitable hash value arose during the derivation (very low probability event) 
+# or raises an exception if an unsuitable hash value arose during the derivation (very low probability event) 
 # in which case the child cannot exist for the given child_index.
 
 def derive_child_ext_priv_key(parent_priv_key, parent_chain_code, child_index) :
@@ -505,14 +504,12 @@ def derive_child_ext_priv_key(parent_priv_key, parent_chain_code, child_index) :
 
 	# as per BIP32 spec
 	if (hmac_output_left_int >= N) :
-		print('ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index')
-		sys.exit(2)
+		raise ValueError('ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index')
 
 	child_priv_key_int = (hmac_output_left_int + parent_priv_key_int) % N
 	if (child_priv_key_int == 0) :
 		# zero is not permissable as a private key
-		print('ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index')
-		sys.exit(2)
+		raise ValueError('ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index')
 
 	child_priv_key = child_priv_key_int.to_bytes(length=32, byteorder='big', signed=False)
 	child_chain_code = hmac_output_right
@@ -534,7 +531,7 @@ def derive_child_ext_priv_key(parent_priv_key, parent_chain_code, child_index) :
 # Returns :
 # child_pub_key = byte array of length 33 containing SEC1 compressed public key
 # child_chain_code = byte array of length 32
-# or terminates script with an error if either :
+# or raises an exception if either :
 # (1) child_index >= HARDENED_INDEX_BEGIN, ie. a hardened child (the requested extended pub key derivation is then not possible), or
 # (2) an unsuitable hash value arises during the derivation (very low probability event) in which case the child cannot exist for 
 # the given child_index.
@@ -544,8 +541,7 @@ def derive_child_ext_pub_key(parent_pub_key, parent_chain_code, child_index) :
 
 	if (child_index >= FIRST_HARDENED_CHILD_INDEX) :
 		# hardened child, requested extended pub key derivation not possible
-		print("ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index {}'".format(child_index - FIRST_HARDENED_CHILD_INDEX))
-		sys.exit(2)
+		raise ValueError("ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index {}'".format(child_index - FIRST_HARDENED_CHILD_INDEX))
 	else :
 		# non-hardened derivation
 		hmac_output = hmac.new(parent_chain_code, parent_pub_key + child_index_bytes, 'sha512').digest()
@@ -556,15 +552,13 @@ def derive_child_ext_pub_key(parent_pub_key, parent_chain_code, child_index) :
 
 	# as per BIP32 spec
 	if (hmac_output_left_int >= N) :
-		print('ERROR in function derive_child_ext_pub_key : an unsuitable hash value arose during the derivation, use a different child index')
-		sys.exit(2)
+		raise ValueError('ERROR in function derive_child_ext_pub_key : an unsuitable hash value arose during the derivation, use a different child index')
 
 	child_pub_key_point = (hmac_output_left_int*G) + S256Point.parse(parent_pub_key) 
 	if (child_pub_key_point.x is None) :
 		# ie. child_pub_key_point is point at infinity on the elliptic curve (this means the associated 
 		# private key for this pub key is zero, which is an invalid value for a private key)
-		print('ERROR in function derive_child_ext_pub_key : an unsuitable hash value arose during the derivation, use a different child index')
-		sys.exit(2)
+		raise ValueError('ERROR in function derive_child_ext_pub_key : an unsuitable hash value arose during the derivation, use a different child index')
 
 	child_pub_key = child_pub_key_point.sec(compressed=True)
 	child_chain_code = hmac_output_right
@@ -623,7 +617,7 @@ def get_parent_type(parent_path_components) :
 # public key (pub_key, chain_code) plus ancillary information relating to the key. The derivation commences at the master key 
 # denoted by 'm' (master private key) or 'M' (master public key). Assumes the global variables master_priv_key,
 # master_pub_key, and master_chain_code have been populated.
-# Checks if derivation_path is of the correct format, terminating the script with an error if it is not. 
+# Checks if derivation_path is of the correct format, raising an exception if it is not. 
 # The correct format is as described in Mastering Bitcoin 2nd Ed. by Andreas Antonopolous, pg. 113. Or as described in :
 # https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#user-content-The_key_tree 
 # except with the child index number for a hardened child denoted by the suffixed prime character ' rather than
@@ -640,8 +634,7 @@ def derivation_path_ext_key(derivation_path) :
 
 	# check first path component is valid - must be 'm' or 'M'
 	if (path_components[0] != 'm' and path_components[0] != 'M') :
-		print("ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'")
-		sys.exit(2)
+		raise ValueError("ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'")
 
 	# check all path components beyond the first are valid and convert them to child index integers. Exit script 
 	# with an error if an invalid format component is detected. Loop is not entered if there is only one path component.
@@ -650,19 +643,16 @@ def derivation_path_ext_key(derivation_path) :
 			# non-hardened child index
 			path_components[i] = int(path_components[i])
 			if not (path_components[i] >= FIRST_NON_HARDENED_CHILD_INDEX and path_components[i] <= LAST_NON_HARDENED_CHILD_INDEX) :
-				print("ERROR in function derivation_path_ext_key : non-hardened child index {} is out of range".format(path_components[i]))
-				sys.exit(2)
+				raise ValueError("ERROR in function derivation_path_ext_key : non-hardened child index {} is out of range".format(path_components[i]))
 		else :
 			match = re.search("(^\d+)'$", path_components[i])
 			if (match) :
 				# hardened child index
 				path_components[i] = int(match.group(1)) + FIRST_HARDENED_CHILD_INDEX
 				if not (path_components[i] >= FIRST_HARDENED_CHILD_INDEX and path_components[i] <= LAST_HARDENED_CHILD_INDEX) :
-					print("ERROR in function derivation_path_ext_key : hardened child index {}' is out of range".format(path_components[i] - FIRST_HARDENED_CHILD_INDEX))
-					sys.exit(2)
+					raise ValueError("ERROR in function derivation_path_ext_key : hardened child index {}' is out of range".format(path_components[i] - FIRST_HARDENED_CHILD_INDEX))
 			else :
-				print("ERROR in function derivation_path_ext_key : invalid child index {} in HD wallet derivation path".format(path_components[i]))
-				sys.exit(2)
+				raise ValueError("ERROR in function derivation_path_ext_key : invalid child index {} in HD wallet derivation path".format(path_components[i]))
 
 	# set the zero-based depth
 	depth = no_of_path_components - 1
@@ -811,7 +801,7 @@ def compute_seed(mnemonic_sentence, passphrase='') :
 # starting_child_key_index = integer in range 0 to 2^32 - 1 representing a hardened or non-hardened child key
 # child_key_range_is_hardened = boolean to say whether the range consists of hardened or non-hardened child keys
 # (cannot contain a mix of both).
-# Validates that the range is within the required limits, exiting the script with an error if not.
+# Validates that the range is within the required limits, raising an exception if not.
 
 def get_range_info(starting_child_key_index, no_of_child_keys) :
 	if (starting_child_key_index.isdecimal()) :
@@ -819,12 +809,10 @@ def get_range_info(starting_child_key_index, no_of_child_keys) :
 		child_key_range_is_hardened = False
 		starting_child_key_index = int(starting_child_key_index)
 		if not (starting_child_key_index >= FIRST_NON_HARDENED_CHILD_INDEX and starting_child_key_index <= LAST_NON_HARDENED_CHILD_INDEX) :
-			print("ERROR in function get_range_info : non-hardened child index {} is out of range".format(starting_child_key_index))
-			sys.exit(2)
+			raise ValueError("ERROR in function get_range_info : non-hardened child index {} is out of range".format(starting_child_key_index))
 		# don't permit crossover of key range into hardened keys
 		if starting_child_key_index + no_of_child_keys - 1 > LAST_NON_HARDENED_CHILD_INDEX :
-			print("ERROR in function get_range_info : range of non-hardened child key indices too large")
-			sys.exit(2)
+			raise ValueError("ERROR in function get_range_info : range of non-hardened child key indices too large")
 	else :
 		match = re.search("(^\d+)'$", starting_child_key_index)
 		if (match) :
@@ -832,15 +820,12 @@ def get_range_info(starting_child_key_index, no_of_child_keys) :
 			child_key_range_is_hardened = True
 			starting_child_key_index = int(match.group(1)) + FIRST_HARDENED_CHILD_INDEX
 			if not (starting_child_key_index >= FIRST_HARDENED_CHILD_INDEX and starting_child_key_index <= LAST_HARDENED_CHILD_INDEX):
-				print("ERROR in function get_range_info : hardened child index {}' is out of range".format(starting_child_key_index - FIRST_HARDENED_CHILD_INDEX))
-				sys.exit(2)
+				raise ValueError("ERROR in function get_range_info : hardened child index {}' is out of range".format(starting_child_key_index - FIRST_HARDENED_CHILD_INDEX))
 			# check range is within limit
 			if starting_child_key_index + no_of_child_keys - 1 > LAST_HARDENED_CHILD_INDEX :
-				print("ERROR in function get_range_info : range of hardened child key indices too large")
-				sys.exit(2)
+				raise ValueError("ERROR in function get_range_info : range of hardened child key indices too large")
 		else :
-			print("ERROR in function get_range_info : invalid child index {}".format(starting_child_key_index))
-			sys.exit(2)
+			raise ValueError("ERROR in function get_range_info : invalid child index {}".format(starting_child_key_index))
 	return (starting_child_key_index, child_key_range_is_hardened)
 
 
@@ -898,7 +883,6 @@ Note : all the required parameters must be included in the above command lines, 
 
 
 if len(sys.argv) == 1 or (sys.argv[1] == '-h') :
-	# no command line arguments
 	print_help_message()
 	sys.exit(0)
 
@@ -959,8 +943,7 @@ if single_key_mode_requested :
 
 	# if parent_type is BIP44, BIP49, or BIP84 then child under the parent must be non-hardened (as per BIP44)
 	if (parent_type != Parent_Derivation_Path_Type.CUSTOM and child_index >= FIRST_HARDENED_CHILD_INDEX) :
-		print("ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent")
-		sys.exit(2)
+		raise ValueError('ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent')
 
 	private_key_derivation = (len(key) == 32)
 	version_prefix_type = parent_type_to_prefix_type(parent_type)
@@ -1050,8 +1033,7 @@ else :
 
 	# if parent_type is BIP44, BIP49, or BIP84 then child keys under the parent must be non-hardened (as per BIP44)
 	if (parent_type != Parent_Derivation_Path_Type.CUSTOM and child_key_range_is_hardened) :
-		print("ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent")
-		sys.exit(2)
+		raise ValueError('ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent')
 
 	private_key_derivation = (len(key) == 32)
 

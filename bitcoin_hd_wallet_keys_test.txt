@@ -438,11 +438,15 @@ Error test.
 
 Code temporarily modified to generate bad hash error.
 
-Command :
-py bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "" m/11/12/13/14 0
-
-Output :
-ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index
+C:\Python Scripts\HD Wallets>py bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "" m/11/12/13/14 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 959, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 690, in derivation_path_ext_key
+    (priv_key, chain_code) = derive_child_ext_priv_key(priv_key, chain_code, child_index)
+  File "bitcoin_hd_wallet_keys.py", line 509, in derive_child_ext_priv_key
+    raise ValueError('ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index')
+ValueError: ERROR in function derive_child_ext_priv_key : an unsuitable hash value arose during the derivation, use a different child index
 
 
 
@@ -453,35 +457,47 @@ Error test.
 
 Invalid characters and child indices in derivation path.
 
-Command :
-py bitcoin_hd_wallet_keys.py -s "" "" n/11/12/13/14 0
-Output :
-ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'
+C:\Python Scripts\HD Wallets>py bitcoin_hd_wallet_keys.py -s "" "" n/11/12/13/14 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 942, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 637, in derivation_path_ext_key
+    raise ValueError("ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'")
+ValueError: ERROR in function derivation_path_ext_key : First component in HD wallet derivation path must be 'm' or 'M'
 
-Command :
-py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648/13/14 0
-Output :
-ERROR in function derivation_path_ext_key : non-hardened child index 2147483648 is out of range
+C:\Python Scripts\HD Wallets>py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648/13/14 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 942, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 646, in derivation_path_ext_key
+    raise ValueError("ERROR in function derivation_path_ext_key : non-hardened child index {} is out of range".format(path_components[i]))
+ValueError: ERROR in function derivation_path_ext_key : non-hardened child index 2147483648 is out of range
 
 Command :
 py bitcoin_hd_wallet_keys.py -s "" "" m/11/12/13/2147483647 0
 Output :
 Success
 
-Command :
-py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648'/13/14 0
-Output :
-ERROR in function derivation_path_ext_key : hardened child index 2147483648' is out of range
+C:\Python Scripts\HD Wallets>py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483648'/13/14 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 942, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 653, in derivation_path_ext_key
+    raise ValueError("ERROR in function derivation_path_ext_key : hardened child index {}' is out of range".format(path_components[i] - FIRST_HARDENED_CHILD_INDEX))
+ValueError: ERROR in function derivation_path_ext_key : hardened child index 2147483648' is out of range
 
 Command :
 py bitcoin_hd_wallet_keys.py -s "" "" m/11/2147483647'/13/14 0
 Output :
 Success
 
-Command :
-py bitcoin_hd_wallet_keys.py -s "" "" m/11/0x12/13/14 0
-Output :
-ERROR in function derivation_path_ext_key : invalid child index 0x12 in HD wallet derivation path
+C:\Python Scripts\HD Wallets>py bitcoin_hd_wallet_keys.py -s "" "" m/11/0x12/13/14 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 942, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 655, in derivation_path_ext_key
+    raise ValueError("ERROR in function derivation_path_ext_key : invalid child index {} in HD wallet derivation path".format(path_components[i]))
+ValueError: ERROR in function derivation_path_ext_key : invalid child index 0x12 in HD wallet derivation path
 
 
 
@@ -492,11 +508,15 @@ Error test.
 
 Attempted public key derivation to hardened child.
 
-Command :
-python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" M/1/2/3'/4 0
-
-Output :
-ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index 3'
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" M/1/2/3'/4 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 942, in <module>
+    (depth, parent_fingerprint, child_index, chain_code, key, parent_type, coin_type) = derivation_path_ext_key(derivation_path)
+  File "bitcoin_hd_wallet_keys.py", line 696, in derivation_path_ext_key
+    (pub_key, chain_code) = derive_child_ext_pub_key(pub_key, chain_code, child_index)
+  File "bitcoin_hd_wallet_keys.py", line 544, in derive_child_ext_pub_key
+    raise ValueError("ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index {}'".format(child_index - FIRST_HARDENED_CHILD_INDEX))
+ValueError: ERROR in function derive_child_ext_pub_key : public parent key to public child key derivation not possible for hardened child index 3'
 
 
 
@@ -507,11 +527,11 @@ Error test.
 
 BIP44 derivation path with hardened address index.
 
-Command :
-python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10'/0/36' 0
-
-Output :
-ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -s "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/0'/10'/0/36' 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 946, in <module>
+    raise ValueError('ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent')
+ValueError: ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
 
 
 
@@ -668,39 +688,47 @@ Test 2.6
 
 Errors.
 
-Command :
-python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/1'/64'/1 10' 3 0
-
-Output :
-ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
-
-
-Command :
-python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648 3 0
-
-Output :
-ERROR in function get_range_info : non-hardened child index 2147483648 is out of range
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/44'/1'/64'/1 10' 3 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 1036, in <module>
+    raise ValueError('ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent')
+ValueError: ERROR in main script : a key with parent type BIP44, BIP49, or BIP84 cannot have a hardened address index under the parent
 
 
-Command :
-python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 10 2147483648 0
-
-Output :
-ERROR in function get_range_info : range of non-hardened child key indices too large
-
-
-Command :
-python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648' 12 0
-
-Output :
-ERROR in function get_range_info : hardened child index 2147483648' is out of range
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648 3 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 911, in <module>
+    (starting_child_key_index, child_key_range_is_hardened) = get_range_info(starting_child_key_index, no_of_child_keys)
+  File "bitcoin_hd_wallet_keys.py", line 812, in get_range_info
+    raise ValueError("ERROR in function get_range_info : non-hardened child index {} is out of range".format(starting_child_key_index))
+ValueError: ERROR in function get_range_info : non-hardened child index 2147483648 is out of range
 
 
-Command :
-python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 20' 2147483648 0
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 10 2147483648 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 911, in <module>
+    (starting_child_key_index, child_key_range_is_hardened) = get_range_info(starting_child_key_index, no_of_child_keys)
+  File "bitcoin_hd_wallet_keys.py", line 815, in get_range_info
+    raise ValueError("ERROR in function get_range_info : range of non-hardened child key indices too large")
+ValueError: ERROR in function get_range_info : range of non-hardened child key indices too large
 
-Output :
-ERROR in function get_range_info : range of hardened child key indices too large
+
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 2147483648' 12 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 911, in <module>
+    (starting_child_key_index, child_key_range_is_hardened) = get_range_info(starting_child_key_index, no_of_child_keys)
+  File "bitcoin_hd_wallet_keys.py", line 823, in get_range_info
+    raise ValueError("ERROR in function get_range_info : hardened child index {}' is out of range".format(starting_child_key_index - FIRST_HARDENED_CHILD_INDEX))
+ValueError: ERROR in function get_range_info : hardened child index 2147483648' is out of range
+
+
+C:\Python Scripts\HD Wallets>python bitcoin_hd_wallet_keys.py -r "fit crunch census knee piano sail logic fiber purchase over obvious describe" "t6E29nbDcU74uX" m/1/2/ 20' 2147483648 0
+Traceback (most recent call last):
+  File "bitcoin_hd_wallet_keys.py", line 911, in <module>
+    (starting_child_key_index, child_key_range_is_hardened) = get_range_info(starting_child_key_index, no_of_child_keys)
+  File "bitcoin_hd_wallet_keys.py", line 826, in get_range_info
+    raise ValueError("ERROR in function get_range_info : range of hardened child key indices too large")
+ValueError: ERROR in function get_range_info : range of hardened child key indices too large
 
 
 
