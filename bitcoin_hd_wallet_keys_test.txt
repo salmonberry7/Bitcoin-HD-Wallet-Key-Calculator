@@ -987,3 +987,26 @@ Note :
 (i) We didn't need the <ext_key_prefix_override> = bip49 since we only require the address not the ext pub key. However note m/49'/1'/0'/0/0 is recognized as a BIP49 type derivation path.
 (ii) Testnet override works since m/49'/1'/0'/0/0 is recognized as a BIP49 type derivation path.
 
+
+
+Test 3.11
+---------
+
+Bitcoin Testnet Segwit Account #2
+
+Trezor Suite & Trezor device reported info :-
+Address derivation path :		m/84'/1'/1'/0/2
+Address :						tb1qnfcr00me23awspllw0vmjhuwcxc7navvv3m8an
+
+Command :
+py bitcoin_hd_wallet_keys.py -s "trick donate erosion sight antique forest palm ticket minor audit category nominee" "" m/84'/1'/1'/0/2 0
+
+Output :
+Detected key type            : BIP84 derivation path
+Extended key prefix override : None
+Detected coin type           : Bitcoin Testnet
+Testnet                      : Yes
+Private key                  : cU4rm4V5qmCZPUqtCUEJ48hT7e4C82MPshdYn4ioDquP7tBNDVbq
+Address                      : tb1qnfcr00me23awspllw0vmjhuwcxc7navvv3m8an
+							   tb1qnfcr00me23awspllw0vmjhuwcxc7navvv3m8an			Trezor
+
